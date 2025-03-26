@@ -1,6 +1,6 @@
 'use client';
 
-import Header from './components/Header';
+import Hero from './components/Hero'; 
 import Main from './components/Main';
 import Footer from './components/Footer';
 
@@ -8,7 +8,7 @@ import Footer from './components/Footer';
 export default function HomePage() {
   return (
     <main className='min-h-screen flex flex-col'>
-      <Header />
+      <Hero />
       <Main />
       <Footer />
     </main>

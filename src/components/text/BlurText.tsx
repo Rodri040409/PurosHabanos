@@ -7,7 +7,9 @@ interface BlurTextProps {
   className?: string;
   animateBy?: 'words' | 'letters';
   direction?: 'top' | 'bottom';
+  onAnimationComplete?: () => void; // Asegúrate de agregar esta propiedad
 }
+
 
 const BlurText = ({
   text = '',
@@ -30,6 +32,7 @@ const BlurText = ({
   ];
 
   useEffect(() => {
+    console.log("Observer iniciado"); // Asegurarse que el observer funcione
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && ref.current) { // Verificar que ref.current no sea null
         setInView(true);
@@ -51,7 +54,7 @@ const BlurText = ({
     elements.length,
     elements.map((_, i) => ({
       from: defaultFrom,
-      to: inView ? async (next: any) => { // Especificar tipo de 'next'
+      to: inView ? async (next: any) => {
         for (const step of defaultTo) {
           await next(step);
         }
@@ -61,7 +64,7 @@ const BlurText = ({
   );
 
   return (
-    <p ref={ref} className={`blur-text ${className}`}>
+    <p ref={ref} className={`${className}`}>
       {springs.map((props, index) => (
         <animated.span
           key={index}

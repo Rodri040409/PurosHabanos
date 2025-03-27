@@ -7,6 +7,8 @@ export default {
     extend: {
       fontFamily: {
         primary: ['Inter', ...defaultTheme.fontFamily.sans],
+        switzer: ['Switzer', 'sans-serif'], // Agregar la fuente Switzer
+        switzerBlackItalic: ['Switzer-BlackItalic', 'sans-serif'], // Agregar la variante Switzer Black Italic
       },
       colors: {
         primary: {
@@ -68,12 +70,21 @@ export default {
             opacity: '1',
           },
         },
+        'fade-out': {
+          '0%': {
+            opacity: '1',
+          },
+          '100%': {
+            opacity: '0',
+          },
+        },
       },
       animation: {
         flicker: 'flicker 3s linear infinite',
         shimmer: 'shimmer 1.3s linear infinite',
-        rotateLogo: 'rotateLogo 4s ease-in-out infinite',
+        rotateLogo: 'rotateLogo 4s ease-in-out forwards',
         'blur-text': 'blur-text 3s ease-out', // Cambié a duración fija para evitar repetición infinita
+        'fade-out': 'fade-out 1s ease-out 2s forwards',
       },
       clipPath: {
         'hero': 'polygon(50%)',

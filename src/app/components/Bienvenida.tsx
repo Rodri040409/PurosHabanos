@@ -1,26 +1,29 @@
 import { useState, useEffect } from 'react';
 import BlurText from '../../components/text/BlurText';
 
-export default function Bienvenida() {
+export default function Bienvenida({ onAnimationComplete }: { onAnimationComplete: () => void }) {
   const [showText, setShowText] = useState(false);
-  const [animationComplete, setAnimationComplete] = useState(false);
+  const [logoVisible, setLogoVisible] = useState(false); // <- nuevo estado
 
   useEffect(() => {
-    // Retraso antes de que el texto "Bienvenido" aparezca
-    const timer = setTimeout(() => {
-      setShowText(true); // Aparecerá después de 3 segundos
-    }, 3000); // Retraso de 3 segundos para la aparición del texto
+    // ⏳ Forzar render del logo antes de animar
+    const startLogo = setTimeout(() => setLogoVisible(true), 50);
 
-    // El texto desaparece después de 7 segundos
-    const timerRemoveText = setTimeout(() => {
+    // Mostrar texto "BIENVENIDO" después de 3s
+    const timerShow = setTimeout(() => setShowText(true), 3000);
+
+    // Ocultar texto y finalizar animación después de 11s
+    const timerEnd = setTimeout(() => {
       setShowText(false);
-    }, 11000); // El texto se mantendrá visible durante 7 segundos (3000ms + 7000ms)
+      onAnimationComplete();
+    }, 7000);
 
     return () => {
-      clearTimeout(timer);
-      clearTimeout(timerRemoveText);
+      clearTimeout(startLogo);
+      clearTimeout(timerShow);
+      clearTimeout(timerEnd);
     };
-  }, []); // Esto solo se ejecuta una vez cuando el componente se monta
+  }, [onAnimationComplete]);
 
   return (
     <div className="bg-[#0C0F14] text-white grid place-items-center h-screen overflow-x-hidden">
@@ -33,12 +36,13 @@ export default function Bienvenida() {
               loading="lazy"
               src="images/logo.png"
               alt="Logo de puros habanos"
-              className="animate-rotateLogo object-contain"
+              className={`object-contain transition-opacity duration-200 ease-in ${
+                logoVisible ? 'animate-rotateLogo opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
             />
           </picture>
         </div>
 
-        {/* Usamos el componente BlurText para mostrar el texto "Bienvenido" */}
         {showText && (
           <div className="absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%]">
             <BlurText
@@ -46,8 +50,8 @@ export default function Bienvenida() {
               delay={150}
               animateBy="words"
               direction="top"
-              onAnimationComplete={() => setAnimationComplete(true)} // Al finalizar la animación
-              className="text-4xl text-white mb-8 animate-fade-out font-switzerBlackItalic" // Aplica la animación fade-out y la fuente Switzer-Bold
+              onAnimationComplete={onAnimationComplete}
+              className="text-4xl text-white mb-8 animate-fade-out font-switzerBlackItalic"
             />
           </div>
         )}

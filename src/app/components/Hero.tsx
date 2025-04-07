@@ -19,7 +19,7 @@ export default function HomeScreen() {
           <img
             src="/images/logo.png"
             alt="Logo"
-            className="h-[120px] mt-[8px] mb-[-8px]"
+            className={`h-[120px] mt-[8px] mb-[-8px] ${fadeIn ? 'animate-heroLogoEnter' : ''}`}
             loading="lazy"
           />
         </picture>

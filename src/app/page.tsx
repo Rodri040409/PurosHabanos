@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Bienvenida from './components/Bienvenida';
 import Hero from './components/Hero';
 import Nav from './components/Nav';
-import Footer from './components/Footer';
+import Productos from './components/Productos';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -36,6 +36,7 @@ export default function HomePage() {
           >
             <Hero />
             <Nav />
+            {/* <Productos /> */}
           </motion.div>
         )}
       </AnimatePresence>

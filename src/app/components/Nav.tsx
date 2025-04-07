@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Nav() {
+  const [activeTab, setActiveTab] = useState('Popular');
+
   useEffect(() => {
     const carousel = document.querySelector('.nav-carousel') as HTMLDivElement | null;
     if (!carousel) return;
@@ -37,7 +39,6 @@ export default function Nav() {
       }
     };
 
-    // 🖱️ Mouse
     carousel.addEventListener('mousedown', (e: MouseEvent) => {
       isDragging = true;
       startX = e.pageX - carousel.offsetLeft;
@@ -66,7 +67,6 @@ export default function Nav() {
       isDragging = false;
     });
 
-    // 📱 Touch
     carousel.addEventListener('touchstart', (e: TouchEvent) => {
       startX = e.touches[0].clientX;
       scrollLeft = carousel.scrollLeft;
@@ -108,26 +108,28 @@ export default function Nav() {
       }
     });
 
-    // 🔧 Reset scroll behavior
     carousel.style.scrollBehavior = 'auto';
 
     return () => stopInertia();
   }, []);
 
   return (
-    <div className="bg-[#0C0F14] text-white px-4 pt-4">
-      <div className="overflow-x-auto nav-carousel whitespace-nowrap flex gap-3 no-scrollbar">
-        {['Popular', 'Nuevo', 'Recomendado', 'Edición Limitada', 'Clásicos', 'Premium'].map((tab, index) => (
-          <button
-            key={index}
-            className={`rounded-full px-4 py-2 border text-sm whitespace-nowrap transition-colors
-              ${index === 0
-                ? 'bg-[#C89B3C] text-black border-[#C89B3C]'
-                : 'bg-transparent border-[#444] text-white hover:bg-[#222]'}`}
-          >
-            {tab}
-          </button>
-        ))}
+    <div className="mt-8 md:mt-12 px-4 text-white">
+      <div className="max-w-screen-sm md:max-w-screen-md mx-auto">
+        <div className="nav-carousel overflow-x-auto whitespace-nowrap flex gap-3 no-scrollbar md:scrollbar-thin md:scrollbar-thumb-[#444] md:scrollbar-track-transparent">
+          {['Popular', 'Nuevo', 'Recomendado', 'Edición Limitada', 'Clásicos', 'Premium'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`rounded-full px-4 py-2 border text-sm whitespace-nowrap transition-all duration-300
+                ${activeTab === tab
+                  ? 'bg-[#C89B3C] text-black border-[#C89B3C]'
+                  : 'bg-transparent border-[#444] text-white hover:bg-[#222]'}`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

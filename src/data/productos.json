@@ -1,0 +1,48 @@
+{
+  "Puros": [
+    {
+      "id": "puro-habano-clasico",
+      "nombre": "Puro Habano Clásico",
+      "precio": 25.99,
+      "descripcion": "Un puro clásico con sabor intenso y aroma inigualable.",
+      "imagen": "/images/productos/puro-clasico.jpg",
+      "whatsappMensaje": "Hola, me interesa el Puro Habano Clásico."
+    },
+    {
+      "id": "puro-habano-dorado",
+      "nombre": "Puro Habano Dorado",
+      "precio": 32.00,
+      "descripcion": "Edición especial con notas dulces y cuerpo medio.",
+      "imagen": "/images/productos/puro-dorado.jpg",
+      "whatsappMensaje": "Hola, me interesa el Puro Habano Dorado."
+    }
+  ],
+  "Accesorios": [
+    {
+      "id": "cortador-premium",
+      "nombre": "Cortador Premium",
+      "precio": 15.50,
+      "descripcion": "Cortador de acero inoxidable para un corte perfecto.",
+      "imagen": "/images/productos/cortador-premium.jpg",
+      "whatsappMensaje": "Hola, me interesa el Cortador Premium."
+    },
+    {
+      "id": "encendedor-dorado",
+      "nombre": "Encendedor Dorado",
+      "precio": 18.75,
+      "descripcion": "Encendedor recargable con diseño elegante.",
+      "imagen": "/images/productos/encendedor-dorado.jpg",
+      "whatsappMensaje": "Hola, me interesa el Encendedor Dorado."
+    }
+  ],
+  "Combos": [
+    {
+      "id": "combo-inicio",
+      "nombre": "Combo de Inicio",
+      "precio": 49.99,
+      "descripcion": "Incluye 2 puros, cortador y encendedor. Ideal para comenzar.",
+      "imagen": "/images/productos/combo-inicio.jpg",
+      "whatsappMensaje": "Hola, me interesa el Combo de Inicio."
+    }
+  ]
+}

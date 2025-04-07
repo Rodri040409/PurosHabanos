@@ -78,6 +78,20 @@ export default {
             opacity: '0',
           },
         },
+        'heroLogoEnter': {
+          '0%': {
+            transform: 'translateX(100vw) rotate(0deg)',
+            opacity: '0',
+          },
+          '80%': {
+            transform: 'translateX(0) rotate(-720deg)',
+            opacity: '1',
+          },
+          '100%': {
+            transform: 'translateX(0) rotate(-720deg)',
+            opacity: '1',
+          },
+        }
       },
       animation: {
         flicker: 'flicker 3s linear infinite',
@@ -85,6 +99,7 @@ export default {
         rotateLogo: 'rotateLogo 4s ease-in-out forwards',
         'blur-text': 'blur-text 3s ease-out', // Cambié a duración fija para evitar repetición infinita
         'fade-out': 'fade-out 1s ease-out 2s forwards',
+        heroLogoEnter: 'heroLogoEnter 2.5s ease-out forwards',
       },
       clipPath: {
         'hero': 'polygon(50%)',

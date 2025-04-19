@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Bienvenida from './components/Bienvenida';
 import Hero from './components/Hero';
 import Nav from './components/Nav';
+import Productos from './components/Productos';
 
 export default function HomePage() {
   const [showMainContent, setShowMainContent] = useState(false);
@@ -35,7 +36,7 @@ export default function HomePage() {
           >
             <Hero />
             <Nav />
-            {/* <Productos /> */}
+            <Productos />
           </motion.div>
         )}
       </AnimatePresence>

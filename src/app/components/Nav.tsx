@@ -1,3 +1,4 @@
+// ✅ BLOQUE 1: Importaciones y estado
 import { useEffect, useRef, useState } from 'react';
 
 const TABS = [
@@ -27,43 +28,38 @@ export default function SmoothCarousel() {
     let lastTime = 0;
     let lastX = 0;
 
+    // ✅ BLOQUE 2: Funciones auxiliares para controlar inercia y evitar rebote
     const stopInertia = () => {
       cancelAnimationFrame(rafID);
       velocity = 0;
+    };
+
+    const clamp = (value: number, min: number, max: number) => {
+      return Math.max(min, Math.min(value, max));
     };
 
     const smoothScroll = () => {
       const containerWidth = container.scrollWidth;
       const wrapperWidth = wrapper.clientWidth;
       const maxTranslate = containerWidth - wrapperWidth;
-    
-      let translateX =
-        -parseFloat(container.style.transform.replace(/[^-0-9.]/g, '')) || 0;
-    
+
+      let translateX = -parseFloat(container.style.transform.replace(/[^-0-9.]/g, '')) || 0;
       translateX -= velocity;
-    
-      // 💡 Protección extra contra rebote visual al final o inicio
-      const margin = 2; // px para margen de seguridad
-    
-      if ((velocity < 0 && translateX <= 0 + margin) || (velocity > 0 && translateX >= maxTranslate - margin)) {
-        translateX = Math.max(0, Math.min(translateX, maxTranslate));
-        container.style.transform = `translateX(-${translateX}px)`;
-        stopInertia();
-        return;
-      }
-    
+      translateX = clamp(translateX, 0, maxTranslate);
+
       container.style.transform = `translateX(-${translateX}px)`;
-    
-      velocity *= 0.93;
-    
+
+      velocity *= 0.92;
+
       if (Math.abs(velocity) < 0.1) {
         stopInertia();
         return;
       }
-    
-      rafID = requestAnimationFrame(smoothScroll);
-    };    
 
+      rafID = requestAnimationFrame(smoothScroll);
+    };
+
+    // ✅ BLOQUE 3: Eventos de mouse
     const onMouseDown = (e: MouseEvent) => {
       isDragging = true;
       startX = e.pageX;
@@ -77,8 +73,14 @@ export default function SmoothCarousel() {
       const delta = e.pageX - currentX;
       currentX = e.pageX;
       velocity = -delta;
+
       const currentTranslate = -parseFloat(container.style.transform.replace(/[^-0-9.]/g, '')) || 0;
-      container.style.transform = `translateX(-${Math.max(0, currentTranslate + delta)}px)`;
+      const containerWidth = container.scrollWidth;
+      const wrapperWidth = wrapper.clientWidth;
+      const maxTranslate = containerWidth - wrapperWidth;
+
+      const newTranslate = clamp(currentTranslate + delta, 0, maxTranslate);
+      container.style.transform = `translateX(-${newTranslate}px)`;
     };
 
     const onMouseUp = () => {
@@ -88,6 +90,7 @@ export default function SmoothCarousel() {
       }
     };
 
+    // ✅ BLOQUE 4: Eventos de touch
     const onTouchStart = (e: TouchEvent) => {
       startX = e.touches[0].clientX;
       currentX = startX;
@@ -95,11 +98,18 @@ export default function SmoothCarousel() {
     };
 
     const onTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
       const delta = e.touches[0].clientX - currentX;
       currentX = e.touches[0].clientX;
       velocity = -delta;
+
       const currentTranslate = -parseFloat(container.style.transform.replace(/[^-0-9.]/g, '')) || 0;
-      container.style.transform = `translateX(-${Math.max(0, currentTranslate + delta)}px)`;
+      const containerWidth = container.scrollWidth;
+      const wrapperWidth = wrapper.clientWidth;
+      const maxTranslate = containerWidth - wrapperWidth;
+
+      const newTranslate = clamp(currentTranslate + delta, 0, maxTranslate);
+      container.style.transform = `translateX(-${newTranslate}px)`;
     };
 
     const onTouchEnd = () => {
@@ -108,11 +118,12 @@ export default function SmoothCarousel() {
       }
     };
 
+    // ✅ BLOQUE 5: Registro y limpieza de eventos
     wrapper.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseup', onMouseUp);
 
-    wrapper.addEventListener('touchstart', onTouchStart, { passive: true });
+    wrapper.addEventListener('touchstart', onTouchStart, { passive: false });
     wrapper.addEventListener('touchmove', onTouchMove, { passive: false });
     wrapper.addEventListener('touchend', onTouchEnd);
 
@@ -127,13 +138,14 @@ export default function SmoothCarousel() {
     };
   }, []);
 
+  // ✅ BLOQUE 6: Render
   return (
     <div className='mt-8 md:mt-12 px-4 text-white'>
       <div className='max-w-screen-sm md:max-w-screen-md mx-auto'>
         <div
           ref={wrapperRef}
           className='overflow-hidden relative'
-          style={{ touchAction: 'none' }}
+          style={{ touchAction: 'none', overscrollBehaviorX: 'none' }}
         >
           <div
             ref={containerRef}

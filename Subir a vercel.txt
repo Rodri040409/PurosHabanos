@@ -23,6 +23,6 @@ Vercel va a hacer esto automáticamente, pero podés hacerlo localmente para ase
 
       git add .
 
-      git commit -m "tu mensaje acá"
+      git commit -m "Renovación de nav"
 
       git push

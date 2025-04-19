@@ -130,7 +130,7 @@ export default function Nav() {
   return (
     <div className='mt-8 md:mt-12 px-4 text-white'>
       <div className='max-w-screen-sm md:max-w-screen-md mx-auto'>
-        <div className='nav-carousel overflow-x-auto whitespace-nowrap flex gap-3 no-scrollbar md:scrollbar-thin md:scrollbar-thumb-[#444] md:scrollbar-track-transparent'>
+        <div className='nav-carousel overflow-x-auto whitespace-nowrap flex gap-3 no-scrollbar md:scrollbar-thin md:scrollbar-thumb-[#444] md:scrollbar-track-transparent overscroll-contain touch-pan-y'>
           {[
             'Nuevo',
             'Puros',
@@ -155,5 +155,5 @@ export default function Nav() {
         </div>
       </div>
     </div>
-  );
+  );  
 }

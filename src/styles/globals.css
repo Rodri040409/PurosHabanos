@@ -79,8 +79,6 @@
     @apply font-primary text-sm md:text-base;
   }
 
-  overscroll-behavior-x: contain;
-  overscroll-behavior-y: none;
   /* #endregion  /**======== Typography =========== */
 
   .layout {
@@ -97,12 +95,6 @@
   .min-h-main {
     @apply min-h-[calc(100vh-56px)];
   }
-}
-
-.nav-carousel {
-  overscroll-behavior-x: contain;
-  overscroll-behavior-y: none;
-  touch-action: pan-y;
 }
 
 @layer utilities {
@@ -144,4 +136,18 @@
 .no-scrollbar {
   -ms-overflow-style: none; /* IE/Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+html,
+body {
+  overscroll-behavior: none;
+  height: 100%;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.nav-carousel {
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: none;
+  touch-action: pan-y;
 }

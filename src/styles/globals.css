@@ -143,5 +143,4 @@
   overscroll-behavior-y: none;
   touch-action: pan-y;
   -webkit-overflow-scrolling: auto; /* ← clave para Safari */
-  overflow-scrolling: auto;
 }

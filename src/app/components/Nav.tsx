@@ -29,13 +29,18 @@ export default function Nav() {
     const smoothScroll = () => {
       const maxScroll = carousel.scrollWidth - carousel.clientWidth;
       if (Math.abs(velocity) > 0.1) {
-        carousel.scrollLeft += velocity;
-        velocity *= 0.93;
-        if (carousel.scrollLeft <= 0 || carousel.scrollLeft >= maxScroll) {
+        const newScrollLeft = carousel.scrollLeft + velocity;
+
+        if (newScrollLeft <= 0 || newScrollLeft >= maxScroll) {
           stopInertia();
-        } else {
-          rafID = requestAnimationFrame(smoothScroll);
+          carousel.scrollLeft = Math.max(0, Math.min(newScrollLeft, maxScroll)); // clamped
+          return;
         }
+
+        carousel.scrollLeft = newScrollLeft;
+        velocity *= 0.93;
+        rafID = requestAnimationFrame(smoothScroll);
+
       } else {
         stopInertia();
       }

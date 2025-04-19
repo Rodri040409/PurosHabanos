@@ -44,16 +44,16 @@ export default function HomeScreen() {
 
         {/* Texto (ocupa 2 columnas) */}
         <div className='relative z-10 text-black col-span-2 space-y-3 pl-2 md:pl-8'>
-          <h2 className='font-bold leading-tight text-[clamp(1.3rem,3.5vw,2rem)]'>
+          <h2 className='font-bold leading-tight text-[clamp(1.6rem,3.5vw,2rem)]'>
             EMPIEZA TU
             <br />
             DÍA CON <span className='text-[#8B4A2C]'>PUROS</span>
           </h2>
-          <p className='text-[clamp(0.85rem,2.5vw,1.1rem)] leading-snug'>
+          <p className='text-[clamp(0.9rem,2.5vw,1.1rem)] leading-none'>
             Explora nuestra nueva línea de puros artesanales, seleccionados con
             la mejor calidad.
           </p>
-          <button className='bg-[#0C0F14] text-white text-[clamp(0.75rem,1.8vw,1rem)] px-4 py-2 rounded-lg mt-2'>
+          <button className='bg-[#0C0F14] text-white text-[clamp(1.1rem,1.8vw,1rem)] px-3 py-3 rounded-lg mt-2'>
             Ver Productos
           </button>
         </div>

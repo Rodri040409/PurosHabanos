@@ -1,6 +1,7 @@
-// ✅ BLOQUE 1: Importaciones y estado
-import { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+'use client';
+
+import { useRef, useState, useEffect } from 'react';
+import { motion, useIsPresent } from 'framer-motion';
 
 const TABS = [
   'Nuevo',
@@ -13,20 +14,37 @@ const TABS = [
 
 export default function SmoothCarousel() {
   const [activeTab, setActiveTab] = useState('Nuevo');
+  const [isMobile, setIsMobile] = useState(false);
+
   const wrapperRef = useRef(null);
   const containerRef = useRef(null);
+
+  useEffect(() => {
+    const isTouch = window.innerWidth <= 768;
+    setIsMobile(isTouch);
+  }, []);
 
   return (
     <div className='mt-8 md:mt-12 px-4 text-white'>
       <div className='max-w-screen-sm md:max-w-screen-md mx-auto'>
-        <div ref={wrapperRef} className='carousel-wrapper'>
+        <div
+          ref={wrapperRef}
+          className={`carousel-wrapper ${isMobile ? 'overflow-x-auto' : 'overflow-hidden'} relative`}
+          style={{
+            WebkitOverflowScrolling: isMobile ? 'touch' : undefined,
+            touchAction: isMobile ? 'auto' : 'none',
+          }}
+        >
           <motion.div
             ref={containerRef}
-            className='carousel-container flex gap-3 whitespace-nowrap'
-            drag='x'
+            className='carousel-container flex gap-3 whitespace-nowrap px-2 py-2'
+            style={{
+              transform: 'translateX(0px)',
+            }}
+            drag={isMobile ? false : 'x'}
             dragConstraints={wrapperRef}
-            dragElastic={0} // sin elasticidad
-            dragMomentum={false} // sin inercia al soltar
+            dragElastic={0}
+            dragMomentum={false}
             transition={{ type: 'tween', duration: 0.2, ease: 'linear' }}
           >
             {TABS.map((tab) => (

@@ -26,3 +26,14 @@ Vercel va a hacer esto automáticamente, pero podés hacerlo localmente para ase
       git commit -m "Renovación de nav"
 
       git push
+
+
+Si algo no se está actualizando bien, usar el comando:
+
+      pnpm install
+
+      git add pnpm-lock.yaml
+
+      git commit -m "fix: update lockfile"
+
+      git push

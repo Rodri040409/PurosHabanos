@@ -33,7 +33,7 @@ export default function SmoothCarousel() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`rounded-full px-6 py-3 border text-sm transition-all duration-300 whitespace-nowrap
+                className={`rounded-full px-8 py-4 border text-sm transition-all duration-300 whitespace-nowrap
                   ${
                     activeTab === tab
                       ? 'bg-[#C89B3C] text-black border-[#C89B3C]'

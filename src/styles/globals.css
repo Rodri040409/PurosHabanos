@@ -138,16 +138,10 @@
   scrollbar-width: none; /* Firefox */
 }
 
-html,
-body {
-  overscroll-behavior: none;
-  height: 100%;
-  overflow: hidden;
-  touch-action: none;
-}
-
 .nav-carousel {
   overscroll-behavior-x: contain;
   overscroll-behavior-y: none;
   touch-action: pan-y;
+  -webkit-overflow-scrolling: auto; /* ← clave para Safari */
+  overflow-scrolling: auto;
 }

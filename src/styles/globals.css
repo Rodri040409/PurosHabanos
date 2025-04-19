@@ -78,6 +78,9 @@
   .p {
     @apply font-primary text-sm md:text-base;
   }
+
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: none;
   /* #endregion  /**======== Typography =========== */
 
   .layout {

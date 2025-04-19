@@ -87,30 +87,34 @@ export default function Nav() {
       'touchmove',
       (e: TouchEvent) => {
         if (isScrollingY) return;
-
+    
         const x = e.touches[0].clientX;
         const y = e.touches[0].clientY;
         const deltaX = x - lastX;
         const deltaY = Math.abs(y - e.touches[0].pageY);
-
+    
         if (deltaY > Math.abs(deltaX)) {
           isScrollingY = true;
           return;
         }
-
+    
         e.preventDefault();
         const timeNow = Date.now();
         const deltaTime = timeNow - lastTime;
-
+    
         velocity = (deltaX / deltaTime) * 25;
         lastX = x;
         lastTime = timeNow;
-
+    
         const walk = (x - startX) * 2.2;
-        carousel.scrollLeft = scrollLeft - walk;
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        let newScrollLeft = scrollLeft - walk;
+        if (newScrollLeft < 0) newScrollLeft = 0;
+        if (newScrollLeft > maxScroll) newScrollLeft = maxScroll;
+        carousel.scrollLeft = newScrollLeft;
       },
       { passive: false },
-    );
+    );    
 
     carousel.addEventListener('touchend', () => {
       if (!isScrollingY && Math.abs(velocity) > threshold) {

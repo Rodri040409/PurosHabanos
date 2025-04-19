@@ -1,7 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
 import BlurText from '../../components/text/BlurText';
 
-export default function Bienvenida({ onAnimationComplete }: { onAnimationComplete: () => void }) {
+export default function Bienvenida({
+  onAnimationComplete,
+}: {
+  onAnimationComplete: () => void;
+}) {
   const [showText, setShowText] = useState(false);
   const [logoVisible, setLogoVisible] = useState(false); // <- nuevo estado
 
@@ -26,32 +31,34 @@ export default function Bienvenida({ onAnimationComplete }: { onAnimationComplet
   }, [onAnimationComplete]);
 
   return (
-    <div className="bg-[#0C0F14] text-white grid place-items-center h-screen overflow-x-hidden">
-      <div className="text-center relative">
-        <div className="w-[200px] md:w-[250px] lg:w-[300px]">
-          <picture className="w-full h-auto">
-            <source srcSet="images/logo.avif" type="image/avif" />
-            <source srcSet="images/logo.webp" type="image/webp" />
+    <div className='bg-[#0C0F14] text-white grid place-items-center h-screen overflow-x-hidden'>
+      <div className='text-center relative'>
+        <div className='w-[200px] md:w-[250px] lg:w-[300px]'>
+          <picture className='w-full h-auto'>
+            <source srcSet='images/logo.avif' type='image/avif' />
+            <source srcSet='images/logo.webp' type='image/webp' />
             <img
-              loading="lazy"
-              src="images/logo.png"
-              alt="Logo de puros habanos"
+              loading='lazy'
+              src='images/logo.png'
+              alt='Logo de puros habanos'
               className={`object-contain transition-opacity duration-200 ease-in ${
-                logoVisible ? 'animate-rotateLogo opacity-100' : 'opacity-0 pointer-events-none'
+                logoVisible
+                  ? 'animate-rotateLogo opacity-100'
+                  : 'opacity-0 pointer-events-none'
               }`}
             />
           </picture>
         </div>
 
         {showText && (
-          <div className="absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%]">
+          <div className='absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%]'>
             <BlurText
-              text="BIENVENIDO"
+              text='BIENVENIDO'
               delay={150}
-              animateBy="words"
-              direction="top"
+              animateBy='words'
+              direction='top'
               onAnimationComplete={onAnimationComplete}
-              className="text-4xl text-white mb-8 animate-fade-out font-switzerBlackItalic"
+              className='text-4xl text-white mb-8 animate-fade-out font-switzerBlackItalic'
             />
           </div>
         )}

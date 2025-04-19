@@ -78,7 +78,7 @@ export default {
             opacity: '0',
           },
         },
-        'heroLogoEnter': {
+        heroLogoEnter: {
           '0%': {
             transform: 'translateX(100vw) rotate(0deg)',
             opacity: '0',
@@ -91,7 +91,7 @@ export default {
             transform: 'translateX(0) rotate(-720deg)',
             opacity: '1',
           },
-        }
+        },
       },
       animation: {
         flicker: 'flicker 3s linear infinite',
@@ -102,9 +102,9 @@ export default {
         heroLogoEnter: 'heroLogoEnter 2.5s ease-out forwards',
       },
       clipPath: {
-        'hero': 'polygon(50%)',
-        'ellipse': 'ellipse(50% 50% at 50% 50%)',
-        'polygon': 'polygon(50% 0%, 100% 100%, 0% 100%)',
+        hero: 'polygon(50%)',
+        ellipse: 'ellipse(50% 50% at 50% 50%)',
+        polygon: 'polygon(50% 0%, 100% 100%, 0% 100%)',
         // Agregar más formas personalizadas
       },
     },
@@ -114,10 +114,13 @@ export default {
     // Plugin para añadir utilidades de clip-path
     function ({ addUtilities, theme, e }: any) {
       const clipPaths = theme('clipPath');
-      const clipPathUtilities = Object.keys(clipPaths).reduce((acc: any, key: string) => {
-        acc[`.${e(`clip-${key}`)}`] = { clipPath: clipPaths[key] };
-        return acc;
-      }, {});
+      const clipPathUtilities = Object.keys(clipPaths).reduce(
+        (acc: any, key: string) => {
+          acc[`.${e(`clip-${key}`)}`] = { clipPath: clipPaths[key] };
+          return acc;
+        },
+        {},
+      );
 
       addUtilities(clipPathUtilities, ['responsive', 'hover']);
     },

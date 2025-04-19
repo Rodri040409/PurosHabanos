@@ -11,7 +11,7 @@
     {
       "id": "puro-habano-dorado",
       "nombre": "Puro Habano Dorado",
-      "precio": 32.00,
+      "precio": 32.0,
       "descripcion": "Edición especial con notas dulces y cuerpo medio.",
       "imagen": "/images/productos/puro-dorado.jpg",
       "whatsappMensaje": "Hola, me interesa el Puro Habano Dorado."
@@ -21,7 +21,7 @@
     {
       "id": "cortador-premium",
       "nombre": "Cortador Premium",
-      "precio": 15.50,
+      "precio": 15.5,
       "descripcion": "Cortador de acero inoxidable para un corte perfecto.",
       "imagen": "/images/productos/cortador-premium.jpg",
       "whatsappMensaje": "Hola, me interesa el Cortador Premium."

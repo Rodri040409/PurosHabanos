@@ -132,7 +132,8 @@ export default function SmoothCarousel() {
       <div className='max-w-screen-sm md:max-w-screen-md mx-auto'>
         <div
           ref={wrapperRef}
-          className='overflow-hidden touch-pan-y relative'
+          className='overflow-hidden relative'
+          style={{ touchAction: 'none' }}
         >
           <div
             ref={containerRef}

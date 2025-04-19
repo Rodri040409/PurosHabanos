@@ -144,12 +144,11 @@ export default function SmoothCarousel() {
       <div className='max-w-screen-sm md:max-w-screen-md mx-auto'>
         <div
           ref={wrapperRef}
-          className='overflow-hidden relative'
-          style={{ touchAction: 'none', overscrollBehaviorX: 'none' }}
+          className='carousel-wrapper'
         >
           <div
             ref={containerRef}
-            className='flex gap-3 whitespace-nowrap will-change-transform'
+            className='carousel-container flex gap-3 whitespace-nowrap'
             style={{ transform: 'translateX(0px)' }}
           >
             {TABS.map((tab) => (

@@ -142,4 +142,14 @@
   touch-action: none;
   overscroll-behavior-x: none;
   overscroll-behavior-y: none;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.carousel-container {
+  overflow: hidden;
+  will-change: transform;
+  -webkit-overflow-scrolling: auto;
+  overscroll-behavior: none;
 }

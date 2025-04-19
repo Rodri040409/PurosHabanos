@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
-import { motion, useIsPresent } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const TABS = [
   'Nuevo',
@@ -16,12 +16,14 @@ export default function SmoothCarousel() {
   const [activeTab, setActiveTab] = useState('Nuevo');
   const [isMobile, setIsMobile] = useState(false);
 
-  const wrapperRef = useRef(null);
-  const containerRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const isTouch = window.innerWidth <= 768;
-    setIsMobile(isTouch);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize(); // Inicial
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
@@ -29,7 +31,10 @@ export default function SmoothCarousel() {
       <div className='max-w-screen-sm md:max-w-screen-md mx-auto'>
         <div
           ref={wrapperRef}
-          className={`carousel-wrapper ${isMobile ? 'overflow-x-auto' : 'overflow-hidden'} relative`}
+          className={`
+            relative w-full
+            ${isMobile ? 'overflow-x-auto no-scrollbar' : 'overflow-hidden md:overflow-x-auto'}
+          `}
           style={{
             WebkitOverflowScrolling: isMobile ? 'touch' : undefined,
             touchAction: isMobile ? 'auto' : 'none',
@@ -37,10 +42,8 @@ export default function SmoothCarousel() {
         >
           <motion.div
             ref={containerRef}
-            className='carousel-container flex gap-3 whitespace-nowrap px-2 py-2'
-            style={{
-              transform: 'translateX(0px)',
-            }}
+            className='flex gap-3 whitespace-nowrap px-2 py-2'
+            style={{ transform: 'translateX(0px)' }}
             drag={isMobile ? false : 'x'}
             dragConstraints={wrapperRef}
             dragElastic={0}

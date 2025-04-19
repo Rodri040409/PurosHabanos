@@ -28,23 +28,25 @@ export default function Nav() {
 
     const smoothScroll = () => {
       const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+    
       if (Math.abs(velocity) > 0.1) {
         const newScrollLeft = carousel.scrollLeft + velocity;
-
-        if (newScrollLeft <= 0 || newScrollLeft >= maxScroll) {
+    
+        const isAtStart = carousel.scrollLeft <= 0 && velocity < 0;
+        const isAtEnd = carousel.scrollLeft >= maxScroll && velocity > 0;
+    
+        if (isAtStart || isAtEnd) {
           stopInertia();
-          carousel.scrollLeft = Math.max(0, Math.min(newScrollLeft, maxScroll)); // clamped
           return;
         }
-
-        carousel.scrollLeft = newScrollLeft;
+    
+        carousel.scrollLeft = Math.max(0, Math.min(newScrollLeft, maxScroll));
         velocity *= 0.93;
         rafID = requestAnimationFrame(smoothScroll);
-
       } else {
         stopInertia();
       }
-    };
+    };    
 
     carousel.addEventListener('mousedown', (e: MouseEvent) => {
       isDragging = true;

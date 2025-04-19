@@ -36,24 +36,33 @@ export default function SmoothCarousel() {
       const containerWidth = container.scrollWidth;
       const wrapperWidth = wrapper.clientWidth;
       const maxTranslate = containerWidth - wrapperWidth;
-
-      let translateX = -parseFloat(container.style.transform.replace(/[^-0-9.]/g, '')) || 0;
-
+    
+      let translateX =
+        -parseFloat(container.style.transform.replace(/[^-0-9.]/g, '')) || 0;
+    
       translateX -= velocity;
-
-      if (translateX < 0) {
-        translateX = 0;
+    
+      // 💡 Protección extra contra rebote visual al final o inicio
+      const margin = 2; // px para margen de seguridad
+    
+      if ((velocity < 0 && translateX <= 0 + margin) || (velocity > 0 && translateX >= maxTranslate - margin)) {
+        translateX = Math.max(0, Math.min(translateX, maxTranslate));
+        container.style.transform = `translateX(-${translateX}px)`;
         stopInertia();
-      } else if (translateX > maxTranslate) {
-        translateX = maxTranslate;
-        stopInertia();
-      } else {
-        velocity *= 0.93;
-        rafID = requestAnimationFrame(smoothScroll);
+        return;
       }
-
+    
       container.style.transform = `translateX(-${translateX}px)`;
-    };
+    
+      velocity *= 0.93;
+    
+      if (Math.abs(velocity) < 0.1) {
+        stopInertia();
+        return;
+      }
+    
+      rafID = requestAnimationFrame(smoothScroll);
+    };    
 
     const onMouseDown = (e: MouseEvent) => {
       isDragging = true;

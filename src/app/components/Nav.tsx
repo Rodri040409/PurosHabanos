@@ -29,23 +29,39 @@ export default function Nav() {
     const smoothScroll = () => {
       const maxScroll = carousel.scrollWidth - carousel.clientWidth;
     
-      if (Math.abs(velocity) > 0.1) {
-        const newScrollLeft = carousel.scrollLeft + velocity;
+      const thresholdPx = 4; // margen de seguridad antes del borde
+      const velocityCutoff = 0.1; // mínima velocidad para continuar animando
+      const nearStart = carousel.scrollLeft <= thresholdPx;
+      const nearEnd = carousel.scrollLeft >= maxScroll - thresholdPx;
     
-        const isAtStart = carousel.scrollLeft <= 0 && velocity < 0;
-        const isAtEnd = carousel.scrollLeft >= maxScroll && velocity > 0;
-    
-        if (isAtStart || isAtEnd) {
-          stopInertia();
-          return;
-        }
-    
-        carousel.scrollLeft = Math.max(0, Math.min(newScrollLeft, maxScroll));
-        velocity *= 0.93;
-        rafID = requestAnimationFrame(smoothScroll);
-      } else {
+      // Si vamos hacia la izquierda y ya estamos casi al inicio
+      if (velocity < 0 && nearStart) {
+        carousel.scrollLeft = 0;
         stopInertia();
+        return;
       }
+    
+      // Si vamos hacia la derecha y ya estamos casi al final
+      if (velocity > 0 && nearEnd) {
+        carousel.scrollLeft = maxScroll;
+        stopInertia();
+        return;
+      }
+    
+      // Aplicamos desplazamiento
+      carousel.scrollLeft += velocity;
+    
+      // Frenamos gradualmente
+      velocity *= 0.93;
+    
+      // Si ya es una velocidad muy baja, detenemos
+      if (Math.abs(velocity) < velocityCutoff) {
+        stopInertia();
+        return;
+      }
+    
+      // Continuamos animación
+      rafID = requestAnimationFrame(smoothScroll);
     };    
 
     carousel.addEventListener('mousedown', (e: MouseEvent) => {

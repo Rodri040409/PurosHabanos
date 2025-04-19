@@ -1,5 +1,5 @@
-// ✅ BLOQUE 1: Importaciones y estado
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 
 const TABS = [
   'Nuevo',
@@ -12,161 +12,56 @@ const TABS = [
 
 export default function SmoothCarousel() {
   const [activeTab, setActiveTab] = useState('Nuevo');
-  const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
 
-  useEffect(() => {
+  const handleDragEnd = (_: any, info: { offset: { x: number }; velocity: { x: number } }) => {
     const container = containerRef.current;
-    const wrapper = wrapperRef.current;
-    if (!container || !wrapper) return;
+    if (!container) return;
 
-    let isDragging = false;
-    let startX = 0;
-    let currentX = 0;
-    let velocity = 0;
-    let rafID: number;
-    let lastTime = 0;
-    let lastX = 0;
+    const wrapperWidth = container.offsetWidth;
+    const scrollWidth = container.scrollWidth;
+    const maxScroll = scrollWidth - wrapperWidth;
 
-    // ✅ BLOQUE 2: Funciones auxiliares para controlar inercia y evitar rebote
-    const stopInertia = () => {
-      cancelAnimationFrame(rafID);
-      velocity = 0;
-    };
+    let finalX = -x.get() + info.offset.x;
 
-    const clamp = (value: number, min: number, max: number) => {
-      return Math.max(min, Math.min(value, max));
-    };
+    // Limita dentro de bounds
+    if (finalX < 0) finalX = 0;
+    if (finalX > maxScroll) finalX = maxScroll;
 
-    const smoothScroll = () => {
-      const containerWidth = container.scrollWidth;
-      const wrapperWidth = wrapper.clientWidth;
-      const maxTranslate = containerWidth - wrapperWidth;
+    animate(x, -finalX, {
+      type: 'spring',
+      stiffness: 300,
+      damping: 30,
+    });
+  };
 
-      let translateX = -parseFloat(container.style.transform.replace(/[^-0-9.]/g, '')) || 0;
-      translateX -= velocity;
-      translateX = clamp(translateX, 0, maxTranslate);
-
-      container.style.transform = `translateX(-${translateX}px)`;
-
-      velocity *= 0.92;
-
-      if (Math.abs(velocity) < 0.1) {
-        stopInertia();
-        return;
-      }
-
-      rafID = requestAnimationFrame(smoothScroll);
-    };
-
-    // ✅ BLOQUE 3: Eventos de mouse
-    const onMouseDown = (e: MouseEvent) => {
-      isDragging = true;
-      startX = e.pageX;
-      currentX = startX;
-      stopInertia();
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      const delta = e.pageX - currentX;
-      currentX = e.pageX;
-      velocity = -delta;
-
-      const currentTranslate = -parseFloat(container.style.transform.replace(/[^-0-9.]/g, '')) || 0;
-      const containerWidth = container.scrollWidth;
-      const wrapperWidth = wrapper.clientWidth;
-      const maxTranslate = containerWidth - wrapperWidth;
-
-      const newTranslate = clamp(currentTranslate + delta, 0, maxTranslate);
-      container.style.transform = `translateX(-${newTranslate}px)`;
-    };
-
-    const onMouseUp = () => {
-      isDragging = false;
-      if (Math.abs(velocity) > 0.5) {
-        rafID = requestAnimationFrame(smoothScroll);
-      }
-    };
-
-    // ✅ BLOQUE 4: Eventos de touch
-    const onTouchStart = (e: TouchEvent) => {
-      startX = e.touches[0].clientX;
-      currentX = startX;
-      stopInertia();
-    };
-
-    const onTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
-      const delta = e.touches[0].clientX - currentX;
-      currentX = e.touches[0].clientX;
-      velocity = -delta;
-
-      const currentTranslate = -parseFloat(container.style.transform.replace(/[^-0-9.]/g, '')) || 0;
-      const containerWidth = container.scrollWidth;
-      const wrapperWidth = wrapper.clientWidth;
-      const maxTranslate = containerWidth - wrapperWidth;
-
-      const newTranslate = clamp(currentTranslate + delta, 0, maxTranslate);
-      container.style.transform = `translateX(-${newTranslate}px)`;
-    };
-
-    const onTouchEnd = () => {
-      if (Math.abs(velocity) > 0.5) {
-        rafID = requestAnimationFrame(smoothScroll);
-      }
-    };
-
-    // ✅ BLOQUE 5: Registro y limpieza de eventos
-    wrapper.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', onMouseUp);
-
-    wrapper.addEventListener('touchstart', onTouchStart, { passive: false });
-    wrapper.addEventListener('touchmove', onTouchMove, { passive: false });
-    wrapper.addEventListener('touchend', onTouchEnd);
-
-    return () => {
-      stopInertia();
-      wrapper.removeEventListener('mousedown', onMouseDown);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
-      wrapper.removeEventListener('touchstart', onTouchStart);
-      wrapper.removeEventListener('touchmove', onTouchMove);
-      wrapper.removeEventListener('touchend', onTouchEnd);
-    };
-  }, []);
-
-  // ✅ BLOQUE 6: Render
   return (
     <div className='mt-8 md:mt-12 px-4 text-white'>
-      <div className='max-w-screen-sm md:max-w-screen-md mx-auto'>
-        <div
-          ref={wrapperRef}
-          className='carousel-wrapper'
+      <div className='max-w-screen-sm md:max-w-screen-md mx-auto overflow-hidden'>
+        <motion.div
+          ref={containerRef}
+          className='flex gap-3 whitespace-nowrap cursor-grab active:cursor-grabbing'
+          drag='x'
+          dragConstraints={{ left: -1000, right: 0 }} // provisional
+          style={{ x }}
+          onDragEnd={handleDragEnd}
         >
-          <div
-            ref={containerRef}
-            className='carousel-container flex gap-3 whitespace-nowrap'
-            style={{ transform: 'translateX(0px)' }}
-          >
-            {TABS.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`rounded-full px-4 py-2 border text-sm transition-all duration-300 whitespace-nowrap
-                  ${
-                    activeTab === tab
-                      ? 'bg-[#C89B3C] text-black border-[#C89B3C]'
-                      : 'bg-transparent border-[#444] text-white hover:bg-[#222]'
-                  }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-        </div>
+          {TABS.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`rounded-full px-4 py-2 border text-sm transition-all duration-300 whitespace-nowrap
+                ${
+                  activeTab === tab
+                    ? 'bg-[#C89B3C] text-black border-[#C89B3C]'
+                    : 'bg-transparent border-[#444] text-white hover:bg-[#222]'
+                }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </motion.div>
       </div>
     </div>
   );

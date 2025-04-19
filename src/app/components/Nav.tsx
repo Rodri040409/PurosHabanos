@@ -33,14 +33,14 @@ export default function SmoothCarousel() {
         {/* Texto de ayuda */}
         {isMobile && (
           <p className="text-center text-xs text-gray-400 mb-2">
-            Desliza para ver más
+            Desliza a la izquierda para ver más
           </p>
         )}
 
         <div className='relative'>
           {/* Sombra en el borde derecho para indicar scroll */}
           {isMobile && (
-            <div className="pointer-events-none absolute right-0 top-0 h-full w-6 z-10 bg-gradient-to-l from-black/20 via-black/5 to-transparent" />
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-8 z-10 bg-gradient-to-l from-black/60 to-transparent" />
           )}
 
           <div

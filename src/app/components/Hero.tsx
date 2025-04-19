@@ -43,7 +43,7 @@ export default function HomeScreen() {
         </picture>
 
         {/* Texto (ocupa 2 columnas) */}
-        <div className='relative z-10 text-black col-span-2 space-y-3 pl-2 md:pl-8'>
+        <div className='relative z-10 text-black col-span-2 space-y-2 pl-2 md:pl-8'>
           <h2 className='font-bold leading-tight text-[clamp(1.8rem,3.5vw,2rem)]'>
             EMPIEZA TU
             <br />

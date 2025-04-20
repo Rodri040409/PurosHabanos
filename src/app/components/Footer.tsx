@@ -42,7 +42,7 @@ export default function Footer() {
           <h3 className="text-lg font-semibold text-[#E5BA8D]">Síguenos</h3>
           <div className="flex gap-6 items-center">
             <a
-              href="https://wa.me/5212285052080"
+              href="https://wa.me/2285062080"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#E5BA8D] transition"

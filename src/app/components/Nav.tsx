@@ -12,8 +12,13 @@ const TABS = [
   'Ceniceros',
 ];
 
-export default function SmoothCarousel() {
-  const [activeTab, setActiveTab] = useState('Nuevo');
+export default function SmoothCarousel({
+  activeTab,
+  setActiveTab,
+}: {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}) {
   const [isMobile, setIsMobile] = useState(false);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -29,8 +34,6 @@ export default function SmoothCarousel() {
   return (
     <div className='mt-8 md:mt-12 px-4 text-white'>
       <div className='max-w-screen-sm md:max-w-screen-md mx-auto'>
-
-        {/* Texto de ayuda */}
         {isMobile && (
           <p className="text-center text-xs text-gray-400 mb-2">
             Desliza a la izquierda para ver más
@@ -38,17 +41,13 @@ export default function SmoothCarousel() {
         )}
 
         <div className='relative'>
-          {/* Sombra en el borde derecho para indicar scroll */}
           {isMobile && (
             <div className="pointer-events-none absolute right-0 top-0 h-full w-8 z-10 bg-gradient-to-l from-black/60 to-transparent" />
           )}
 
           <div
             ref={wrapperRef}
-            className={`
-              w-full relative
-              ${isMobile ? 'overflow-x-auto no-scrollbar' : 'overflow-hidden md:overflow-x-auto'}
-            `}
+            className={`w-full relative ${isMobile ? 'overflow-x-auto no-scrollbar' : 'overflow-hidden md:overflow-x-auto'}`}
             style={{
               WebkitOverflowScrolling: isMobile ? 'touch' : undefined,
               touchAction: isMobile ? 'auto' : 'none',
@@ -57,7 +56,6 @@ export default function SmoothCarousel() {
             <motion.div
               ref={containerRef}
               className='flex gap-3 whitespace-nowrap px-2 py-2'
-              style={{ transform: 'translateX(0px)' }}
               drag={isMobile ? false : 'x'}
               dragConstraints={wrapperRef}
               dragElastic={0}

@@ -6,7 +6,7 @@
         "nombre": "Puro Robusto Reserva",
         "precio": 45.0,
         "descripcion": "Una joya entre los puros robusto. Elaborado con hojas añejadas durante cinco años, su sabor es profundo con notas de cacao y cuero.",
-        "imagen": "/images/productos/puro-robusto-reserva.jpg",
+        "imagen": "/images/banner--puros.png",
         "whatsappMensaje": "Hola, me interesa el Puro Robusto Reserva.",
         "orden": 1
       },
@@ -15,7 +15,7 @@
         "nombre": "Encendedor Llama Azul",
         "precio": 22.5,
         "descripcion": "Encendedor tipo soplete de triple llama azul, ideal para un encendido uniforme incluso en exteriores.",
-        "imagen": "/images/productos/encendedor-llama-azul.jpg",
+        "imagen": "/images/Product2.jpg",
         "whatsappMensaje": "Hola, me interesa el Encendedor Llama Azul.",
         "orden": 2
       }
@@ -26,7 +26,7 @@
         "nombre": "Cortador de Guillotina Negro",
         "precio": 12.0,
         "descripcion": "Diseño ergonómico y cuchillas afiladas para un corte limpio. Compacto y duradero.",
-        "imagen": "/images/productos/cortador-guillotina-negro.jpg",
+        "imagen": "/images/Product3.jpg",
         "whatsappMensaje": "Hola, me interesa el Cortador de Guillotina Negro.",
         "orden": 1
       }
@@ -39,7 +39,7 @@
         "nombre": "Puro Churchill Oro Viejo",
         "precio": 55.75,
         "descripcion": "De cuerpo completo, el Churchill Oro Viejo ofrece una fumada prolongada con un perfil terroso y final especiado.",
-        "imagen": "/images/productos/puro-churchill-oro-viejo.jpg",
+        "imagen": "/images/Product1.jpg",
         "whatsappMensaje": "Hola, me interesa el Puro Churchill Oro Viejo.",
         "fechaPublicacion": "2025-04-17 20:00:00"
       },
@@ -48,7 +48,7 @@
         "nombre": "Puro Churchill Noche Estelar",
         "precio": 59.99,
         "descripcion": "Elegante y suave, este puro está pensado para una experiencia de noche con toques de vainilla y café tostado.",
-        "imagen": "/images/productos/puro-churchill-noche.jpg",
+        "imagen": "/images/Product2.jpg",
         "whatsappMensaje": "Hola, me interesa el Puro Churchill Noche Estelar.",
         "fechaPublicacion": "2025-04-16 20:00:00"
       }
@@ -59,7 +59,7 @@
         "nombre": "Puro Torpedo Especial",
         "precio": 47.30,
         "descripcion": "De corte afilado y sabor complejo. Combina matices de madera, pimienta blanca y nuez moscada.",
-        "imagen": "/images/productos/puro-torpedo-especial.jpg",
+        "imagen": "/images/Product3.jpg",
         "whatsappMensaje": "Hola, me interesa el Puro Torpedo Especial.",
         "fechaPublicacion": "2025-04-15 20:00:00"
       }
@@ -70,7 +70,7 @@
         "nombre": "Puro Robusto Clásico",
         "precio": 39.99,
         "descripcion": "Compacto y poderoso, ideal para fumadores exigentes que buscan intensidad y balance.",
-        "imagen": "/images/productos/puro-robusto-clasico.jpg",
+        "imagen": "/images/Product1.jpg",
         "whatsappMensaje": "Hola, me interesa el Puro Robusto Clásico.",
         "fechaPublicacion": "2025-04-14 20:00:00"
       },
@@ -79,7 +79,7 @@
         "nombre": "Puro Robusto Reserva",
         "precio": 45.00,
         "descripcion": "Una joya entre los puros robusto. Elaborado con hojas añejadas durante cinco años, su sabor es profundo con notas de cacao y cuero.",
-        "imagen": "/images/productos/puro-robusto-reserva.jpg",
+        "imagen": "/images/Product2.jpg",
         "whatsappMensaje": "Hola, me interesa el Puro Robusto Reserva.",
         "fechaPublicacion": "2025-04-13 20:00:00"
       }
@@ -90,7 +90,7 @@
         "nombre": "Puro Panetela Café Criollo",
         "precio": 29.50,
         "descripcion": "Estilizado y ligero, este panetela tiene un aroma sutil a café y tabaco dulce. Ideal para una fumada rápida.",
-        "imagen": "/images/productos/puro-panetela-cafe.jpg",
+        "imagen": "/images/Product3.jpg",
         "whatsappMensaje": "Hola, me interesa el Puro Panetela Café Criollo.",
         "fechaPublicacion": "2025-04-12 20:00:00"
       }
@@ -102,7 +102,7 @@
       "nombre": "Porta Puros de Cuero Negro",
       "precio": 38.99,
       "descripcion": "Diseño elegante de cuero legítimo, con capacidad para 3 puros. Ideal para viajes o eventos.",
-      "imagen": "/images/productos/porta-puros-cuero-negro.jpg",
+      "imagen": "/images/Product1.jpg",
       "whatsappMensaje": "Hola, me interesa el Porta Puros de Cuero Negro.",
       "fechaPublicacion": "2025-04-11 20:00:00"
     },
@@ -111,7 +111,7 @@
       "nombre": "Porta Puros Metálico Deluxe",
       "precio": 45.00,
       "descripcion": "Estructura metálica con interior de cedro, mantiene la humedad y frescura del puro.",
-      "imagen": "/images/productos/porta-puros-metalico.jpg",
+      "imagen": "/images/Product2.jpg",
       "whatsappMensaje": "Hola, me interesa el Porta Puros Metálico Deluxe.",
       "fechaPublicacion": "2025-04-10 20:00:00"
     },
@@ -120,7 +120,7 @@
       "nombre": "Porta Puros de Viaje Compacto",
       "precio": 33.25,
       "descripcion": "Ligero, compacto y resistente al agua. Perfecto para llevar uno o dos puros en el bolsillo.",
-      "imagen": "/images/productos/porta-puros-viaje.jpg",
+      "imagen": "/images/Product3.jpg",
       "whatsappMensaje": "Hola, me interesa el Porta Puros de Viaje Compacto.",
       "fechaPublicacion": "2025-04-09 20:00:00"
     }
@@ -131,7 +131,7 @@
       "nombre": "Cortador de Guillotina Rojo Vino",
       "precio": 13.25,
       "descripcion": "Con acabado brillante y diseño moderno. Ofrece cortes precisos sin esfuerzo.",
-      "imagen": "/images/productos/cortador-guillotina-rojo.jpg",
+      "imagen": "/images/Product1.jpg",
       "whatsappMensaje": "Hola, me interesa el Cortador de Guillotina Rojo Vino.",
       "fechaPublicacion": "2025-04-08 20:00:00"
     },
@@ -140,7 +140,7 @@
       "nombre": "Cortador de Guillotina Inoxidable",
       "precio": 14.99,
       "descripcion": "Fabricado en acero inoxidable premium. Resistente y de larga duración.",
-      "imagen": "/images/productos/cortador-guillotina-inox.jpg",
+      "imagen": "/images/Product2.jpg",
       "whatsappMensaje": "Hola, me interesa el Cortador de Guillotina Inoxidable.",
       "fechaPublicacion": "2025-04-07 20:00:00"
     }
@@ -151,7 +151,7 @@
       "nombre": "Encendedor Metálico Negro",
       "precio": 19.80,
       "descripcion": "Diseño robusto en acabado negro mate. Alta potencia con sistema recargable.",
-      "imagen": "/images/productos/encendedor-metalico-negro.jpg",
+      "imagen": "/images/Product3.jpg",
       "whatsappMensaje": "Hola, me interesa el Encendedor Metálico Negro.",
       "fechaPublicacion": "2025-04-06 20:00:00"
     },
@@ -160,7 +160,7 @@
       "nombre": "Encendedor Doble Llama Jet",
       "precio": 24.00,
       "descripcion": "Sistema de doble llama soplete para un encendido rápido y parejo. Moderno y elegante.",
-      "imagen": "/images/productos/encendedor-doble-llama.jpg",
+      "imagen": "/images/Product1.jpg",
       "whatsappMensaje": "Hola, me interesa el Encendedor Doble Llama Jet.",
       "fechaPublicacion": "2025-04-05 20:00:00"
     }
@@ -171,7 +171,7 @@
       "nombre": "Cenicero de Cerámica Negro",
       "precio": 28.00,
       "descripcion": "Cenicero de gran tamaño en cerámica con espacio para hasta 4 puros. Ideal para reuniones.",
-      "imagen": "/images/productos/cenicero-ceramica-negro.jpg",
+      "imagen": "/images/Product2.jpg",
       "whatsappMensaje": "Hola, me interesa el Cenicero de Cerámica Negro.",
       "fechaPublicacion": "2025-04-04 20:00:00"
     },
@@ -180,7 +180,7 @@
       "nombre": "Cenicero Metálico Dorado",
       "precio": 32.50,
       "descripcion": "Diseño premium en acabado dorado, con base antideslizante y gran capacidad.",
-      "imagen": "/images/productos/cenicero-metalico-dorado.jpg",
+      "imagen": "/images/Product3.jpg",
       "whatsappMensaje": "Hola, me interesa el Cenicero Metálico Dorado.",
       "fechaPublicacion": "2025-04-03 20:00:00"
     },
@@ -189,7 +189,7 @@
       "nombre": "Cenicero de Viaje Plegable",
       "precio": 18.00,
       "descripcion": "Compacto y fácil de transportar. Ideal para usar en exteriores sin dejar residuos.",
-      "imagen": "/images/productos/cenicero-de-viaje.jpg",
+      "imagen": "/images/Product1.jpg",
       "whatsappMensaje": "Hola, me interesa el Cenicero de Viaje Plegable.",
       "fechaPublicacion": "2025-04-02 20:00:00"
     }

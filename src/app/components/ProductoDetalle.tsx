@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { ChevronLeft, X } from 'lucide-react';
 import productosData from '@/data/productos.json';
 
-const WHATSAPP_NUMERO = '2285052080';
+const WHATSAPP_NUMERO = '2285062080';
 
 export default function ProductoDetalle({
   id,

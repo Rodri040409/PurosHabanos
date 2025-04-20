@@ -15,9 +15,9 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   robots: { index: true, follow: true },
   icons: {
-    icon: '/favicon/favicon.ico',
-    shortcut: '/favicon/favicon-16x16.png',
-    apple: '/favicon/apple-touch-icon.png',
+    icon: '/images/logo.png', // ✅ Nuevo ícono basado en tu logo
+    shortcut: '/images/logo.png',
+    apple: '/images/logo.png',
   },
   manifest: '/favicon/site.webmanifest',
   openGraph: {
@@ -25,7 +25,14 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     siteName: siteConfig.title,
-    images: [`${siteConfig.url}/images/og.jpg`],
+    images: [
+      {
+        url: `${siteConfig.url}/images/og.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Puros Orquídea - Elegancia en cada fumada',
+      },
+    ],
     type: 'website',
     locale: 'es_MX',
   },
@@ -34,35 +41,28 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     images: [`${siteConfig.url}/images/og.jpg`],
+    creator: '@purosorquidea',
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='es'>
+    <html lang='es' className='scroll-smooth antialiased'>
       <head>
-        {/* Meta adicionales */}
         <meta charSet='UTF-8' />
         <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta name='theme-color' content='#0C0F14' />
+        <meta name='author' content='Puros Orquídea' />
 
-        {/* Swiper styles (si usas swiper) */}
-        <link
-          rel='stylesheet'
-          href='https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css'
-        />
+        {/* ✅ Íconos personalizados con logo */}
+        <link rel='icon' href='/images/logo.png' type='image/png' />
+        <link rel='apple-touch-icon' href='/images/logo.png' />
+        <link rel='shortcut icon' href='/images/logo.png' />
 
-        {/* Fuentes personalizadas */}
+        {/* Fuentes */}
         <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link
-          rel='preconnect'
-          href='https://fonts.gstatic.com'
-          crossOrigin='anonymous'
-        />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
         <link
           href='https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap'
           rel='stylesheet'
@@ -76,10 +76,15 @@ export default function RootLayout({
           rel='stylesheet'
         />
 
-        {/* Ícono personalizado */}
-        <link rel='icon' href='/favicon/favicon-32x32.png' type='image/png' />
+        {/* Swiper (si lo usas) */}
+        <link
+          rel='stylesheet'
+          href='https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css'
+        />
       </head>
-      <body>{children}</body>
+      <body className='bg-[#0C0F14] text-white selection:bg-[#C89B3C]/60'>
+        {children}
+      </body>
     </html>
   );
 }

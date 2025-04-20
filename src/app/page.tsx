@@ -10,7 +10,8 @@ import Hero from './components/Hero';
 import Nav from './components/Nav';
 import Productos from './components/Productos';
 import ProductoDetalle from './components/ProductoDetalle';
-import ProductOverlayHandler from './components/ProductOverlayHandler'; // Nuevo componente
+import ProductOverlayHandler from './components/ProductOverlayHandler'; 
+import Footer from './components/Footer'; 
 
 export default function HomePage() {
   const [showMainContent, setShowMainContent] = useState(false);
@@ -66,6 +67,7 @@ export default function HomePage() {
                 window.history.pushState({}, '', `/producto/${id}`);
               }}
             />
+            <Footer />
           </motion.div>
         )}
       </AnimatePresence>

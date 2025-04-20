@@ -15,7 +15,13 @@ type Producto = {
 
 const CANTIDAD_MAS_RECIENTES = 5;
 
-export default function Productos({ categoria }: { categoria: string }) {
+export default function Productos({
+  categoria,
+  onProductoClick,
+}: {
+  categoria: string;
+  onProductoClick: (id: string) => void;
+}) {
   const dataCategoria = productosData[categoria as keyof typeof productosData];
 
   if (!dataCategoria) return null;
@@ -56,9 +62,9 @@ export default function Productos({ categoria }: { categoria: string }) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="px-4 py-4 space-y-6"
+      className="px-4 py-4 space-y-6 max-w-screen-md mx-auto"
     >
-      {/* ✅ Mostrar sección más recientes solo si estamos en "Nuevo" */}
+      {/* ✅ Más recientes solo en "Nuevo" */}
       {categoria === "Nuevo" && productosRecientes.length > 0 && (
         <div>
           <h3 className="text-[#C89B3C] text-sm mb-2 font-medium">
@@ -66,19 +72,27 @@ export default function Productos({ categoria }: { categoria: string }) {
           </h3>
           <div className="space-y-2">
             {productosRecientes.map((producto) => (
-              <ProductoCard key={producto.id} producto={producto} />
+              <ProductoCard
+                key={producto.id}
+                producto={producto}
+                onClick={() => onProductoClick(producto.id)}
+              />
             ))}
           </div>
         </div>
       )}
 
-      {/* ✅ Si la categoría es un array de productos (no tiene subcategorías) */}
+      {/* ✅ Productos directos */}
       {esArrayDirecto &&
         (dataCategoria as Producto[]).map((producto) => (
-          <ProductoCard key={producto.id} producto={producto} />
+          <ProductoCard
+            key={producto.id}
+            producto={producto}
+            onClick={() => onProductoClick(producto.id)}
+          />
         ))}
 
-      {/* ✅ Si tiene subcategorías */}
+      {/* ✅ Subcategorías */}
       {!esArrayDirecto &&
         Object.entries(dataCategoria).map(([subcat, items]: [string, any]) => {
           if (Array.isArray(items) && items.length > 0) {
@@ -89,7 +103,11 @@ export default function Productos({ categoria }: { categoria: string }) {
                 </h3>
                 <div className="space-y-2">
                   {items.map((producto: Producto) => (
-                    <ProductoCard key={producto.id} producto={producto} />
+                    <ProductoCard
+                      key={producto.id}
+                      producto={producto}
+                      onClick={() => onProductoClick(producto.id)}
+                    />
                   ))}
                 </div>
               </div>

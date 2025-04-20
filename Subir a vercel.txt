@@ -23,7 +23,7 @@ Vercel va a hacer esto automáticamente, pero podés hacerlo localmente para ase
 
       git add .
 
-      git commit -m "Colocación de las primeras cards horizontales"
+      git commit -m "Colocación de los detalles de las cards"
 
       git push
 

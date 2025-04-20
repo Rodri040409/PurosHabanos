@@ -11,7 +11,13 @@ type Producto = {
   imagen: string;
 };
 
-export default function ProductoCard({ producto }: { producto: Producto }) {
+export default function ProductoCard({
+  producto,
+  onClick,
+}: {
+  producto: Producto;
+  onClick?: () => void;
+}) {
   const { nombre, descripcion, precio, imagen } = producto;
 
   const descripcionCorta =
@@ -22,12 +28,12 @@ export default function ProductoCard({ producto }: { producto: Producto }) {
     .replace(".", ",")
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-  // Base para .webp y .avif
   const baseImage = imagen.replace(/\.(jpg|jpeg|png|webp|avif)$/i, "");
 
   return (
     <motion.div
-      className="flex items-center bg-[#2c2b2f] rounded-xl shadow-md w-full max-w-sm px-4 py-3"
+      onClick={onClick}
+      className="flex items-center bg-[#2c2b2f] rounded-xl shadow-md w-full max-w-4xl mx-auto px-4 lg:px-6 py-4 cursor-pointer"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
@@ -49,18 +55,20 @@ export default function ProductoCard({ producto }: { producto: Producto }) {
 
       {/* Información */}
       <div className="flex flex-col justify-center ml-4 flex-1 overflow-hidden">
-        <h3 className="text-white text-sm font-semibold truncate">{nombre}</h3>
-        <p className="text-gray-400 text-xs leading-tight truncate">
+        <h3 className="text-white text-base lg:text-lg font-semibold truncate">
+          {nombre}
+        </h3>
+        <p className="text-gray-400 text-sm lg:text-base leading-tight truncate">
           {descripcionCorta}
         </p>
-        <p className="text-[#C89B3C] font-bold text-sm mt-1">
+        <p className="text-[#C89B3C] font-bold text-base mt-1">
           ${precioFormateado}
         </p>
       </div>
 
       {/* Icono flecha */}
       <div className="ml-2 text-[#C89B3C]">
-        <ChevronRight size={18} />
+        <ChevronRight size={20} />
       </div>
     </motion.div>
   );

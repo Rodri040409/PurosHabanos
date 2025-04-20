@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from "framer-motion";
 import ProductoCard from "@/components/Cards/ProductHorizontal";
 import productosData from "@/data/productos.json";
 
@@ -22,7 +23,6 @@ export default function Productos({ categoria }: { categoria: string }) {
   const capitalizar = (str: string) =>
     str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
-  // 🔍 Buscar productos con fecha en TODO el JSON
   const recolectarGlobalConFecha = (obj: any): Producto[] => {
     const productos: Producto[] = [];
 
@@ -51,11 +51,19 @@ export default function Productos({ categoria }: { categoria: string }) {
   const esArrayDirecto = Array.isArray(dataCategoria);
 
   return (
-    <div className="px-4 py-4 space-y-6">
+    <motion.div
+      key={categoria}
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="px-4 py-4 space-y-6"
+    >
       {/* ✅ Mostrar sección más recientes solo si estamos en "Nuevo" */}
       {categoria === "Nuevo" && productosRecientes.length > 0 && (
         <div>
-          <h3 className="text-[#C89B3C] text-sm mb-2 font-medium">Más recientes</h3>
+          <h3 className="text-[#C89B3C] text-sm mb-2 font-medium">
+            Más recientes
+          </h3>
           <div className="space-y-2">
             {productosRecientes.map((producto) => (
               <ProductoCard key={producto.id} producto={producto} />
@@ -89,6 +97,6 @@ export default function Productos({ categoria }: { categoria: string }) {
           }
           return null;
         })}
-    </div>
+    </motion.div>
   );
 }

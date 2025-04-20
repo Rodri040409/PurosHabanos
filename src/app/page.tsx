@@ -1,32 +1,22 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState, useRef } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Suspense } from 'react';
 
 import Bienvenida from './components/Bienvenida';
 import Hero from './components/Hero';
 import Nav from './components/Nav';
 import Productos from './components/Productos';
 import ProductoDetalle from './components/ProductoDetalle';
+import ProductOverlayHandler from './components/ProductOverlayHandler'; // Nuevo componente
 
 export default function HomePage() {
   const [showMainContent, setShowMainContent] = useState(false);
   const [activeTab, setActiveTab] = useState('Nuevo');
   const [productoActivo, setProductoActivo] = useState<string | null>(null);
-
-  const searchParams = useSearchParams();
   const router = useRouter();
-
-  // 🧠 Almacena el ID si venía uno desde la URL
-  const initialProductId = useRef<string | null>(searchParams.get('producto'));
-
-  // ✅ Mostrar card después de bienvenida
-  useEffect(() => {
-    if (showMainContent && initialProductId.current) {
-      setProductoActivo(initialProductId.current);
-    }
-  }, [showMainContent]);
 
   // 🔙 Soporte para botón "atrás"
   useEffect(() => {
@@ -69,17 +59,30 @@ export default function HomePage() {
           >
             <Hero />
             <Nav activeTab={activeTab} setActiveTab={setActiveTab} />
-            <Productos categoria={activeTab} onProductoClick={setProductoActivo} />
+            <Productos
+              categoria={activeTab}
+              onProductoClick={(id) => {
+                setProductoActivo(id);
+                window.history.pushState({}, '', `/producto/${id}`);
+              }}
+            />
           </motion.div>
         )}
       </AnimatePresence>
 
+      {/* ✅ Solo toma el producto desde la URL si no hay uno ya activo */}
+      <Suspense fallback={null}>
+        <ProductOverlayHandler
+          setProductoActivo={setProductoActivo}
+          productoActivo={productoActivo}
+          showMainContent={showMainContent}
+        />
+      </Suspense>
+
+      {/* ✅ Vista detalle del producto */}
       <AnimatePresence>
         {productoActivo && (
-          <ProductoDetalle
-            id={productoActivo}
-            onClose={cerrarCard}
-          />
+          <ProductoDetalle id={productoActivo} onClose={cerrarCard} />
         )}
       </AnimatePresence>
     </main>

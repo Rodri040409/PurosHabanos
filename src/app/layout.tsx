@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.title,
     images: [
       {
-        url: `${siteConfig.url}/images/og.jpg`,
+        url: `${siteConfig.url}/images/og.png`,
         width: 1200,
         height: 630,
         alt: 'Puros Orquídea - Elegancia en cada fumada',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/images/og.jpg`],
+    images: [`${siteConfig.url}/images/og.png`],
     creator: '@purosorquidea',
   },
 };
